@@ -219,8 +219,6 @@ html,body{height:100%;width:100%;margin:0;padding:0;background:var(--bg);color:v
 
 /* ── Hide mobile nav on desktop ── */
 .mobile-bottom-nav{display:none}
-.mobile-menu-overlay{display:none}
-.mobile-menu-drawer{display:none}
 @media(max-width:680px){
   .mobile-bottom-nav{display:flex !important}
 }
