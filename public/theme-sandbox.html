@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Svasthya Theme Editor</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --bg: #f7f4ec;
+      --surface: #fffbf0;
+      --surface2: #f2ebd9;
+      --border: #e4decb;
+      --border2: #d4cbb3;
+      --teal: #00a896;
+      --teal2: #007a6e;
+      --teal-bg: #cbe8e4;
+      --text: #0d1117;
+      --text2: #5a6478;
+      --text3: #9aa3b2;
+      --font-d: 'Instrument Serif', Georgia, serif;
+      --font-b: 'Manrope', sans-serif;
+      --r: 14px;
+      --r2: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; width: 100%;
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-b);
+    }
+    
+    .app-shell { display: flex; height: 100vh; overflow: hidden; }
+    .left-rail { width: 260px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--surface); padding: 20px 16px; }
+    .center-col { flex: 1; overflow-y: auto; padding: 0; }
+    .right-rail { width: 300px; flex-shrink: 0; border-left: 1px solid var(--border); background: var(--surface); padding: 20px 16px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 13px; padding: 11px 16px; border-radius: var(--r);
+      font-size: 14.5px; font-weight: 600; color: var(--text2); margin-bottom: 5px;
+    }
+    .nav-item.active { background: var(--teal-bg); color: var(--teal); }
+    
+    .feed-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--surface);
+    }
+    .post-input {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r2);
+      padding: 16px 20px; margin: 20px;
+    }
+    
+    .post-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r2);
+      padding: 18px 20px; margin: 0 20px 20px;
+    }
+    
+    .action-btn { background: transparent; border: none; font-size: 13px; font-weight: 600; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .btn-p { background: linear-gradient(135deg, var(--teal), var(--teal2)); color: #fff; border: none; padding: 10px 20px; border-radius: 50px; font-weight: 700; cursor: pointer; }
+
+    /* Theme Editor Overlay */
+    #theme-editor {
+      position: fixed; bottom: 20px; right: 20px; background: #fff; border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15); width: 300px; z-index: 9999;
+      font-family: sans-serif; border: 1px solid #ddd; overflow: hidden;
+    }
+    .te-header { background: #111; color: #fff; padding: 12px 16px; font-weight: bold; display: flex; justify-content: space-between; cursor: pointer; }
+    .te-body { padding: 16px; max-height: 400px; overflow-y: auto; }
+    .te-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .te-row label { font-size: 13px; color: #333; font-weight: 500; }
+    .te-row input[type="color"] { border: none; width: 40px; height: 30px; border-radius: 4px; cursor: pointer; padding: 0; background: none;}
+    .te-footer { padding: 12px 16px; border-top: 1px solid #eee; background: #fafafa; text-align: center; }
+    .te-btn { padding: 8px 16px; background: #111; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    <div class="left-rail">
+      <h1 style="font-family: var(--font-d); font-size: 28px; font-style: italic; color: var(--teal); margin-bottom: 30px; padding-left: 16px;">Svasthya</h1>
+      <div class="nav-item active">🏠 Home Feed</div>
+      <div class="nav-item">🔍 Search / Tags</div>
+      <div class="nav-item">🩺 Doctors Only</div>
+      <div class="nav-item">🧠 AI Summariser</div>
+      <div class="nav-item">📍 Outbreak Map</div>
+      <div class="nav-item">📅 Book Tests</div>
+    </div>
+    
+    <div class="center-col">
+      <div class="feed-header">
+        <h2 style="font-family: var(--font-d); font-size: 22px; font-style: italic; font-weight: 400;">Your Health Feed</h2>
+      </div>
+      
+      <div class="post-input">
+        <div style="display: flex; gap: 12px;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border);"></div>
+          <div style="flex: 1;">
+            <p style="color: var(--text3); padding-top: 10px;">Share a health update, ask a question...</p>
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+              <button class="btn-p">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="post-card">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
+          <div style="width: 42px; height: 42px; border-radius: 50%; background: #d0d7e3;"></div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; font-size: 14.5px;">Dr. Priya Sharma</span>
+              <span style="font-size: 10px; background: rgba(26,115,232,.08); color: #1558b0; padding: 2px 7px; border-radius: 20px; font-weight: 700; border: 1px solid rgba(26,115,232,.2);">KNOWLEDGE</span>
+            </div>
+            <span style="font-size: 11.5px; color: var(--text3);">2 hours ago</span>
+          </div>
+        </div>
+        <p style="font-size: 14.5px; line-height: 1.7; margin-bottom: 12px;">Remember to stay hydrated! Drinking enough water helps maintain blood pressure, regulates body temperature, and lubricates joints. Aim for at least 8 glasses a day.</p>
+        <div style="display: flex; gap: 20px;">
+          <button class="action-btn">❤️ 125</button>
+          <button class="action-btn">💬 14</button>
+          <button class="action-btn">🔖 Save</button>
+        </div>
+      </div>
+
+      <div class="post-card">
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
+          <div style="width: 42px; height: 42px; border-radius: 50%; background: #e4e8ef;"></div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-weight: 700; font-size: 14.5px;">Anonymous Patient</span>
+              <span style="font-size: 12px; background: var(--surface2); color: var(--text2); padding: 2px 7px; border-radius: 4px; font-weight: 600;">Patient</span>
+            </div>
+            <span style="font-size: 11.5px; color: var(--text3);">5 hours ago</span>
+          </div>
+        </div>
+        <p style="font-size: 14.5px; line-height: 1.7; margin-bottom: 12px;">I've been experiencing lower back pain for the last week. Setting up a standing desk helped a bit, but does anyone have stretches they recommend?</p>
+        <div style="display: flex; gap: 20px;">
+          <button class="action-btn">❤️ 8</button>
+          <button class="action-btn">💬 5</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="right-rail">
+      <div style="background: var(--surface2); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+        <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 12px;">Trending Tags</h3>
+        <p style="font-size: 14px; font-weight: 700; color: var(--teal); margin-bottom: 8px;">#mentalhealth</p>
+        <p style="font-size: 14px; font-weight: 700; color: var(--teal); margin-bottom: 8px;">#nutrition</p>
+        <p style="font-size: 14px; font-weight: 700; color: var(--teal); margin-bottom: 8px;">#fitness</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="theme-editor">
+    <div class="te-header" onclick="document.getElementById('te-body').style.display = document.getElementById('te-body').style.display === 'none' ? 'block' : 'none'">
+      <span>🎨 Theme Customizer</span>
+      <span>▼</span>
+    </div>
+    <div id="te-body">
+      <div class="te-body" id="color-inputs"></div>
+      <div class="te-footer">
+        <button class="te-btn" onclick="copyCSS()">Copy CSS Variables</button>
+        <div id="copy-msg" style="font-size: 11px; color: green; margin-top: 6px; display: none;">Copied to clipboard!</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const variables = [
+      { name: '--bg', label: 'App Background', default: '#f7f4ec' },
+      { name: '--surface', label: 'Card / Sidebar Surface', default: '#fffbf0' },
+      { name: '--surface2', label: 'Light Fill (Badges)', default: '#f2ebd9' },
+      { name: '--border', label: 'Borders', default: '#e4decb' },
+      { name: '--border2', label: 'Stronger Borders', default: '#d4cbb3' },
+      { name: '--teal', label: 'Primary Brand Color', default: '#00a896' },
+      { name: '--teal2', label: 'Primary Darker', default: '#007a6e' },
+      { name: '--teal-bg', label: 'Light Green BG', default: '#cbe8e4' },
+      { name: '--text', label: 'Main Text', default: '#0d1117' },
+      { name: '--text2', label: 'Secondary Text', default: '#5a6478' },
+      { name: '--text3', label: 'Muted Text', default: '#9aa3b2' }
+    ];
+
+    const container = document.getElementById('color-inputs');
+    const root = document.documentElement;
+
+    variables.forEach(v => {
+      const row = document.createElement('div');
+      row.className = 'te-row';
+      row.innerHTML = `
+        <label>${v.label} (${v.name})</label>
+        <input type="color" id="${v.name}" value="${v.default}">
+      `;
+      container.appendChild(row);
+
+      const input = row.querySelector('input');
+      input.addEventListener('input', (e) => {
+        root.style.setProperty(v.name, e.target.value);
+      });
+    });
+
+    function copyCSS() {
+      let output = ':root {\n';
+      variables.forEach(v => {
+        const val = getComputedStyle(root).getPropertyValue(v.name).trim() || v.default;
+        output += `  ${v.name}: ${val};\n`;
+      });
+      output += '}';
+      navigator.clipboard.writeText(output);
+      const msg = document.getElementById('copy-msg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 2000);
+    }
+  </script>
+</body>
+</html>
