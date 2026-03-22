@@ -1,16 +1,37 @@
-# React + Vite
+# 🏥 Svasthya: AI-Powered Healthcare Community
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Svasthya** is an AI-driven social platform designed to bridge the gap between unreliable internet searches and expensive medical consultations. It provides a safe ecosystem for anonymous symptom sharing, AI-powered triage, and verified medical advice.
 
-Currently, two official plugins are available:
+## 🚀 The Problem
+High costs often prevent people from seeking professional medical advice. Instead, they turn to search engines, which often lead to misinformation and unnecessary panic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💡 The Solution
+* **Anonymous Posting:** Users can share symptoms without privacy concerns.
+* **Verified Expertise:** Only credentialed doctors can provide responses.
+* **AI Triage:** An integrated AI layer analyzes symptoms to suggest urgency levels (Low/Medium/High).
+* **Community Trust:** A credibility scoring system based on doctor engagement and upvotes.
 
-## React Compiler
+## 🛠️ Tech Stack
+* **Frontend:** React + Vite
+* **Styling:** Tailwind CSS
+* **Deployment:** Vercel
+* **Version Control:** GitHub
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧠 Key Features
+* **For Patients:** Symptom posting, AI insights, and access to a directory of verified doctors.
+* **For Doctors:** Reputation building through community interaction and organic expertise promotion.
+* **AI Layer:** Preliminary symptom analysis and non-diagnostic medical guidance.
 
-## Expanding the ESLint configuration
+## ⚙️ Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/s5zy77/svasthyaproto.git](https://github.com/s5zy77/svasthyaproto.git)
+
+2. **Install dependencies**
+   '''bash
+   npm install
+
+3. **Run the development server**
+   '''bash
+   npm run dev
