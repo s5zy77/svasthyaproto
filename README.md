@@ -1,3 +1,7 @@
+# Team Name: Resource
+# Project Name: Svasthya
+# Hackathon: HackIndia Spark 6 - NCR Central Region
+
 # 🏥 Svasthya: AI-Powered Healthcare Community
 
 **Svasthya** is an AI-driven social platform designed to bridge the gap between unreliable internet searches and expensive medical consultations. It provides a safe ecosystem for anonymous symptom sharing, AI-powered triage, and verified medical advice.
